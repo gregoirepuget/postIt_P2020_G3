@@ -71,6 +71,14 @@ $(document).ready(function(){
       localStorage.setItem("listPostItLocal", JSON.stringify(listPostIt));
     
     });
+    
+    $(".delete").on('click', function(){
+      var postIt_ID=$(this).parent().parent().attr("data-key");
+      
+      listPostIt.splice(postIt_ID, 1);
+      localStorage.setItem("listPostItLocal", JSON.stringify(listPostIt));
+    
+    });
   
   }
   
