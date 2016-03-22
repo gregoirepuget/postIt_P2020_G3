@@ -29,7 +29,21 @@ $(document).ready(function(){
     listPostIt.push(infoPostIt);
     localStorage.setItem("listPostItLocal", JSON.stringify(listPostIt));
    
+    afficherPostIt(listPostIt.length-1);
+    
   });
+  
+  function afficherPostIt(postIt_ID)
+  {
+    var content='<div class="postick" data-key="'+postIt_ID+'" style="left:'+listPostIt[postIt_ID].posX+'px; top:'+listPostIt[postIt_ID].posY+'px; background:'+listPostIt[postIt_ID].couleur+';">';
+    content += '  <div class="toolbar"><span class="delete">x</span></div>';
+    content += '  <div contenteditable="true" class="editable">'+listPostIt[postIt_ID].content+'</div>';
+    content += '</div>';
+    
+    
+    $("body").append(content);
+  
+  }
   
   
   function getTirage(limit)
@@ -39,6 +53,16 @@ $(document).ready(function(){
   
   
 });
+
+
+
+
+
+
+
+
+
+
 
 
 
