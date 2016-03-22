@@ -77,7 +77,7 @@ $(document).ready(function(){
       
       listPostIt.splice(postIt_ID, 1);
       localStorage.setItem("listPostItLocal", JSON.stringify(listPostIt));
-    
+      $('.postick[data-key='+postIt_ID+']').remove();
     });
   
   }
