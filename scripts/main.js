@@ -1,11 +1,17 @@
 $(document).ready(function(){
   
-
+  //localStorage.removeItem('listPostItLocal');
+  
   var listPostIt = localStorage.getItem('listPostItLocal');
   if(listPostIt != null)
   {
     listPostIt = JSON.parse(listPostIt);
     console.log(listPostIt);
+    
+    for(var i=0; i < listPostIt.length; i++)
+    {
+        afficherPostIt(i);
+    }
   }
   else
   {
@@ -42,6 +48,29 @@ $(document).ready(function(){
     
     
     $("body").append(content);
+    
+    $(".postick").draggable({
+      cancel: ".editable",
+      stack: ".postick",
+      zIndex: 1000,
+      stop: function( event, ui ) {
+        var postIt_ID= $(this).attr("data-key");
+        var posX= $(this).position().left;
+        var posY= $(this).position().top;
+        
+        listPostIt[postIt_ID].posX=posX;
+        listPostIt[postIt_ID].posY=posY;
+        localStorage.setItem("listPostItLocal", JSON.stringify(listPostIt));
+      }
+    });
+    
+    $(".editable").on('blur', function(){
+      var postIt_ID=$(this).parent().attr('data-key');
+      var content = $(this).html();
+      listPostIt[postIt_ID].content=content;
+      localStorage.setItem("listPostItLocal", JSON.stringify(listPostIt));
+    
+    });
   
   }
   
